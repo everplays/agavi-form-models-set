@@ -19,7 +19,7 @@ also you need to load css/js files in client directory into your page.
 
 ### I have a Form module already, what should i do?
 
-you can put models into your existing Form module, but if there's any name conflict or you just don't want to do it make WhatEverYouWant module & replace all Form_ with WhatEverYouWant_ in models:
+you can put models into your existing Form module, but if there's any name conflict or you just don't want to do it make WhatEverYouWant module & replace all `Form_` with `WhatEverYouWant_` in models:
 
 	$ find /path/to/agavi-form-models-set/src -name "*php" -exec sed -i 's/Form_/WhatEverYouWant_/g' {} \;
 
@@ -128,7 +128,7 @@ How to use it?
 	?>
 
 ### how to render a form?
-just pass your Form_FormModel instance to your template/view & render it like `$form->html()`.
+just pass your `Form_FormModel` instance to your template/view & render it like `$form->html()`.
 
 ### What is form's markup?
 generated markup is based on twitter-bootstrap.
