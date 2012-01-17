@@ -148,3 +148,5 @@ Yes, take a look at above example, as you can see email will be validated if `su
 ### I've a complex element how i can validate it?
 define `registerValidators` method on your element, you will get following parameters: `AgaviValidationManager $vm, array $depends, array $unvalidatedParameters, array $unvalidatedFiles` so you can register your validators into AgaviValidationManager.
 
+### what is resource element?
+think it's a replacement for html's select element based on autocomplete of jquery-ui so you can expect anything you expect from jquery-ui autocomplete but there's more: think you want to load cities based on states, for example only show cities of New York when user has selected New York as State.
