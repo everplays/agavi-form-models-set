@@ -129,7 +129,7 @@ also you can make a form using lazy config
 			)
 		)
 	);
-	$form = Form_FormModel::parseExt($config);
+	$form = Form_FormModel::fromJson($config);
 	$form->action = $this->getContext()->getRouting('my.routing');
 	?>
 
