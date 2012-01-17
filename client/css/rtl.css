@@ -1,0 +1,137 @@
+
+body {
+	direction: rtl;
+}
+
+label {
+	float: right;
+}
+
+.container-fluid > .sidebar {
+	float: right;
+	left: auto;
+	right: 20px;
+}
+
+.formError div.formErrorArrow {
+	margin: -2px 13px 0 0;
+}
+
+.row > [class*="span"] {
+	float: right;
+	margin-left: auto;
+	margin-right: 20px;
+}
+
+fieldset legend {
+	padding-left: 0px;
+	padding-right: 150px;
+}
+
+form .input {
+	margin-left: auto;
+	margin-right: 150px;
+}
+
+.inputs-list label {
+	margin-left: 0px;
+	margin-right: 20px;
+	text-align: right;
+}
+
+.inputs-list input[type="radio"], .inputs-list input[type="checkbox"] {
+	margin-left: 0;
+	margin-right: -20px;
+	float: right;
+}
+
+.input-append input {
+	float: right;
+	-webkit-border-radius:0 3px 3px 0;
+	-moz-border-radius:0 3px 3px 0;
+	border-radius:0 3px 3px 0;
+}
+
+.input-append .add-on {
+	-webkit-border-radius: 3px 0 0 3px;
+	-moz-border-radius: 3px 0 0 3px;
+	border-radius: 3px 0 0 3px;
+	margin-left: 0;
+	margin-right: -1px;
+}
+
+.input-prepend .add-on, .input-append .add-on {
+	float: right;
+}
+
+.close {
+	float: left;
+}
+
+.topbar h3 a, .topbar .brand {
+	float: right;
+	margin-right: -20px;
+	margin-left: auto;
+	padding: 8px 20px 12px;
+}
+
+.topbar div > ul, .nav {
+	float: right;
+	margin: 0 0 0 10px;
+}
+
+.topbar div > ul > li, .nav > li {
+	float: right;
+}
+
+.topbar form {
+	float: right;
+}
+
+.topbar div > ul.secondary-nav, .nav.secondary-nav {
+	float: left;
+	margin-left: 0px;
+	margin-right: 10px;
+}
+
+ul, ol {
+	margin: 0 25px 18px 0;
+}
+
+.captcha img {
+	float: right;
+	border: 1px solid #CCCCCC;
+	-webkit-border-radius: 0 3px 3px 0;
+	-moz-border-radius: 0 3px 3px 0;
+	border-radius: 0 3px 3px 0;
+}
+
+.captcha .refresh {
+	left: auto;
+	right: 200px;
+	-webkit-border-radius: 3px 0 0 3px;
+	-moz-border-radius: 3px 0 0 3px;
+	border-radius: 3px 0 0 3px;
+}
+
+.tabs > li, .pills > li {
+	float: right;
+}
+
+table th, table td {
+	text-align: right;
+}
+
+.row {
+	margin-right: -20px;
+	margin-left: auto;
+}
+
+.pagination ul {
+	float: right;
+}
+
+.pagination a {
+	float: right;
+}
+

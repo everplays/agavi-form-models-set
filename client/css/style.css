@@ -1,0 +1,36 @@
+/**
+ * workaround to make jquery-calendars working
+ */
+
+.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button, .ui-datepicker table {
+	font-size: 11px;
+}
+
+.ui-datepicker .ui-datepicker-header {
+	text-align: center;
+}
+
+.ui-datepicker-cmd-next, .ui-datepicker-cmd-clear {
+	float: left;
+}
+
+.ui-datepicker-cmd-prev, .ui-datepicker-cmd-close {
+	float: right;
+}
+
+select.calendars-month-year {
+	width: auto;
+}
+
+.ui-datepicker {
+	display: block !important;
+}
+
+/**
+ * make a box for resources
+ */
+.ui-menu {
+	max-height: 200px;
+	overflow: auto;
+}
+
