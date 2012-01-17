@@ -114,6 +114,25 @@ How to use it?
 	// $form is ready
 	?>
 
+also you can make a form using lazy config
+
+	<?php
+	// think we have fetched $config from mongodb/couchdb/redis/...
+	$config = array(
+		'id' => 1,
+		'title' => 'our form title',
+		'description' => 'description of our form',
+		'items' => array(
+			array(
+				'xtype' => 'textfield',
+				'name' => 'fieldname'
+			)
+		)
+	);
+	$form = Form_FormModel::parseExt($config);
+	$form->action = $this->getContext()->getRouting('my.routing');
+	?>
+
 ### You said i can validate user input by a form, how's that?
 
 	<?php
