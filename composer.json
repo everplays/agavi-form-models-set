@@ -1,5 +1,5 @@
 {
-    "name": "xamin/Form",
+    "name": "xamin/form",
     "require": {
         "php": ">=5.3.0"
     },
