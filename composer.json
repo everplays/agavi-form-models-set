@@ -1,0 +1,10 @@
+{
+    "name": "xamin/Form",
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "description": "A Form library with Agavi integration.",
+    "autoload": {
+        "psr-0": {"Form": "src/"}
+    }
+}
