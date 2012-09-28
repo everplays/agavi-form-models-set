@@ -1,21 +1,11 @@
 <?php
 
-if(!class_exists('Form_ElementModel'))
-	require __DIR__'/../ElementModel.class.php';
-
-class Form_Elements_ResourceFieldModel extends Form_ElementModel
+class Form_Elements_ResourceField extends Form_Element
 {
-	/**
-	 * @var array languages that are rtl
-	 */
-	private $bidi = array(
-		'fa'
-	);
-
 	/**
 	 * constructs element
 	 */
-	public function __construct($configuration=null, Form_Elements_FieldsetModel $form=null)
+	public function __construct($configuration=null, Form_Elements_Fieldset $form=null)
 	{
 		$this->configDefinition = array_merge(
 			$this->configDefinition,
@@ -73,12 +63,6 @@ class Form_Elements_ResourceFieldModel extends Form_ElementModel
 	 */
 	public function jQueryValidationEngine($html)
 	{
-		$locale = $this->getContext()->getTranslationManager()->getCurrentLocaleIdentifier();
-		$locale = explode('_', $locale);
-		$locale = array_shift($locale);
-		$position = '';
-		if(in_array($locale, $this->bidi))
-			$position = 'position: { my : "right top", at: "right bottom" },';
 		$validation = array();
 		if($this->required===true)
 		{
@@ -97,7 +81,6 @@ class Form_Elements_ResourceFieldModel extends Form_ElementModel
 jQuery(document).ready(function(){
 	$("#'.self::idPrefix.$this->id."\").resource({
 		minLength: 0,
-		{$position}
 		depends: {$depends},
 		source: {$source},
 		params: {$params}
@@ -131,42 +114,16 @@ jQuery(document).ready(function(){
 		{
 			$view = $this->value;
 			$xView = true;
-			if(is_array($this->source))
-			{
-				foreach($this->source as $item)
-				{
-					$item = (object) $item;
-					if($item->id==$this->value)
-					{
-						$view = $item->label;
-						$xView = true;
-						break;
-					}
-				}
-			}
-			else
-			{
-				$proxy = $this->getContext()->getModel('Proxy');
-				$response = $proxy->requestJson('admin/forms/selectables.json', HTTP_Request2::METHOD_GET, array(
-					'field' => $this->id,
-					'workflow' => AgaviConfig::get('Nosazin.workflow'),
-					'filter' => array(
-						'id' => $this->value
-					)
-				));
-				if(is_object($response) and $response->success)
-				{
-					foreach($response->result as $item)
-					{
-						if($item->id==$this->value)
-						{
-							$view = $item->label;
-							$xView = true;
-							break;
-						}
-					}
-				}
-			}
+            foreach($this->source as $item)
+            {
+                $item = (object) $item;
+                if($item->id==$this->value)
+                {
+                    $view = $item->label;
+                    $xView = true;
+                    break;
+                }
+            }
 			$return .= "<input type=\"text\" name=\"{$this->name}_view\" ".
 				"id=\"{$id}_view\" value=\"{$view}\" ".
 				($this->readonly===true?'readonly="readonly" ':'').

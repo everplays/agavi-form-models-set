@@ -1,14 +1,11 @@
 <?php
 
-if(!class_exists('Form_Elements_FieldsetModel'))
-	require __DIR__.'/Elements/FieldsetModel.class.php';
-
-class Form_FormModel extends Form_Elements_FieldsetModel
+class Form_Form extends Form_Elements_Fieldset
 {
 	/**
 	 * constructs element
 	 */
-	public function __construct($configuration=null, Form_FormModel $form=null)
+	public function __construct($configuration=null, Form_Form $form=null)
 	{
 		$this->configDefinition = array_merge(
 			$this->configDefinition,
@@ -104,23 +101,16 @@ HERE;
 	/**
 	 * parses config object
 	 *
-	 * should be used to make Form_FormModel object from a config
+	 * should be used to make Form_Form object from a config
 	 * (configuration is inspired by extjs lazy config)
 	 *
 	 * @param object $config lazy configuration
-	 * @param Form_FormModel $form
-	 * @return Form_FormModel
+	 * @param Form_Form $form
+	 * @return Form_Form
 	 */
-	public static function fromJson($config, Form_Elements_FieldsetModel $form=null)
+	public static function fromJson($config, Form_Elements_Fieldset $form=null)
 	{
-		$contextProfile = AgaviConfig::get('core.default_context');
-		if(is_null($contextProfile))
-		{
-			$contextProfile = md5(microtime());
-			AgaviConfig::set('core.default_context', $contextProfile);
-		}
-		$context = AgaviContext::getInstance();
-		$_form = $context->getModel('Form', 'Form', array($config, $form));
+		$_form = new self($config, $form);
 		self::parseChildren($config, $_form);
 		return $_form;
 	}

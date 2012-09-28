@@ -1,13 +1,13 @@
 <?php
 
-class Form_ValidatorModel extends AgaviValidator
+class Form_Validator extends AgaviValidator
 {
-	public static function registerValidators(Form_FormModel $form, AgaviValidationManager $vm, array $parameters, array $files=array())
+	public static function registerValidators(Form_Form $form, AgaviValidationManager $vm, array $parameters, array $files=array())
 	{
 		$conditions = array();
 		foreach($form->getChildren() as $child)
 		{
-			if($child instanceof Form_Elements_FieldsetModel)
+			if($child instanceof Form_Elements_Fieldset)
 				continue;
 			$parents = (array) $child->parents;
 			$depends = array();
@@ -22,7 +22,7 @@ class Form_ValidatorModel extends AgaviValidator
 				if(!isset($conditions[$depend]))
 				{
 					$vm->createValidator(
-						'Form_ValidatorModel',
+						'Form_Validator',
 						array($parent->name),
 						array(), // no error will be happen as we
 						// run this validator with severity="silent"
@@ -46,7 +46,7 @@ class Form_ValidatorModel extends AgaviValidator
 			else
 			{
 				$vm->createValidator(
-					'Form_ValidatorModel',
+					'Form_Validator',
 					array($child->name),
 					array('' => 'field is required'), // error messages will be handled don't worry about it
 					array( //parameters
@@ -65,12 +65,12 @@ class Form_ValidatorModel extends AgaviValidator
 	function validate()
 	{
 		$element = $this->getParameter('element');
-		if(!$element instanceof Form_ElementModel)
+		if(!$element instanceof Form_Element)
 		{
 			$model = $this->getParameter('model');
 			$module = $this->getParameter('module');
 			$config = $this->getParameter('configuration');
-			$element = $this->getContext()->getModel($model, $module, array($config));
+			$element = new $model($config);
 		}
 
 		try
@@ -79,7 +79,7 @@ class Form_ValidatorModel extends AgaviValidator
 			$this->export($element->value);
 			return true;
 		}
-		catch(Form_ValidationExceptionModel $e)
+		catch(Form_ValidationException $e)
 		{
 			$this->errorMessages = $e->getValidationErrors();
 			foreach($this->errorMessages as $error => $message)

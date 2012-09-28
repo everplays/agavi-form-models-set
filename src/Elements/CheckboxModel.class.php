@@ -1,14 +1,11 @@
 <?php
 
-if(!class_exists('Form_ElementModel'))
-	require __DIR__'/../ElementModel.class.php';
-
-class Form_Elements_CheckboxModel extends Form_ElementModel
+class Form_Elements_Checkbox extends Form_Element
 {
 	/**
 	 * constructs element
 	 */
-	public function __construct($configuration=null, Form_Elements_FieldsetModel $form=null)
+	public function __construct($configuration=null, Form_Elements_Fieldset $form=null)
 	{
 		$this->configDefinition = array_merge(
 			$this->configDefinition,

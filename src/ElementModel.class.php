@@ -1,14 +1,9 @@
 <?php
 
-abstract class Form_ElementModel implements AgaviIModel
+abstract class Form_Element
 {
 	const idPrefix = 'atras-el-';
 	const elementClass = 'clearfix';
-
-	/**
-	 * @var AgaviContext current application context
-	 */
-	protected $context = null;
 
 	/**
 	 * @var array name of configurations
@@ -41,7 +36,7 @@ abstract class Form_ElementModel implements AgaviIModel
 	protected $children = array();
 
 	/**
-	 * @var Form_FormModel form model
+	 * @var Form_Form form class
 	 */
 	protected $form = null;
 
@@ -49,9 +44,9 @@ abstract class Form_ElementModel implements AgaviIModel
 	 * constructs element
 	 *
 	 * @param mixed $configuration configuration of element
-	 * @param Form_Elements_FieldsetModel $form container form
+	 * @param Form_Elements_Fieldset $form container form
 	 */
-	public function __construct($configuration=null, Form_Elements_FieldsetModel $form=null)
+	public function __construct($configuration=null, Form_Elements_Fieldset $form=null)
 	{
 		if(!empty($configuration))
 		{
@@ -73,27 +68,6 @@ abstract class Form_ElementModel implements AgaviIModel
 			{
 				$this->{$name} = $value;
 			}
-	}
-
-	/**
-	 * Retrieve the current application context.
-	 *
-	 * @return AgaviContext The current AgaviContext instance.
-	 */
-	public final function getContext()
-	{
-		return $this->context;
-	}
-
-	/**
-	 * Initialize this model.
-	 *
-	 * @param AgaviContext $context The current application context.
-	 * @param array $parameters passed parameters to construct
-	 */
-	public function initialize(AgaviContext $context, array $parameters = array())
-	{
-		$this->context = $context;
 	}
 
 	/**
@@ -138,9 +112,9 @@ abstract class Form_ElementModel implements AgaviIModel
 	/**
 	 * adds a new child to element
 	 *
-	 * @param Form_ElementModel $child new child to get added
+	 * @param Form_Element $child new child to get added
 	 */
-	public function addChild(Form_ElementModel $child)
+	public function addChild(Form_Element $child)
 	{
 		if(!$this->allowChildren)
 		{
@@ -200,7 +174,7 @@ abstract class Form_ElementModel implements AgaviIModel
 		// if specific validation existed would go here & if
 		// anything goes wrong will put error message into errors
 		if(!empty($errors))
-			throw $this->getContext()->getModel('ValidationException', 'Form', array(($errors)));
+			throw Form_ValidationException($errors);
 		return $value;
 	}
 }

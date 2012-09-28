@@ -1,28 +1,11 @@
 <?php
 
-if(!class_exists('Form_ElementModel'))
-	require __DIR__'/../ElementModel.class.php';
-
-class Form_Elements_DateFieldModel extends Form_ElementModel
+class Form_Elements_DateField extends Form_Element
 {
-	/**
-	 * @var array maps languages with calendar type
-	 */
-	public static $calendar = array(
-		'fa' => 'persian'
-	);
-
-	/**
-	 * @var array languages that are rtl
-	 */
-	private $bidi = array(
-		'fa'
-	);
-
 	/**
 	 * constructs element
 	 */
-	public function __construct($configuration=null, Form_Elements_FieldsetModel $form=null)
+	public function __construct($configuration=null, Form_Elements_Fieldset $form=null)
 	{
 		$this->configDefinition = array_merge(
 			$this->configDefinition,
@@ -72,15 +55,8 @@ class Form_Elements_DateFieldModel extends Form_ElementModel
 		}
 		if(!empty($validation))
 			$html = str_replace("<input", "<input class=\"validate[".implode(',', $validation)."]\"", $html);
-		$locale = $this->getContext()->getTranslationManager()->getCurrentLocaleIdentifier();
-		$locale = explode('_', $locale);
-		$locale = array_shift($locale);
 		$calendar = 'undefined';
-		if(isset(self::$calendar[$locale]))
-			$calendar = "jQuery.calendars.instance('".self::$calendar[$locale]."', '{$locale}')";
 		$alignment = '';
-		if(in_array($locale, $this->bidi))
-			$alignment = "alignment: 'bottomRight',";
 		$id = self::idPrefix."{$this->id}";
 		$html .= <<<HERE
 <script type="text/javascript">

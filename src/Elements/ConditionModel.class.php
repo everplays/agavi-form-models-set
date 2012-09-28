@@ -1,9 +1,6 @@
 <?php
 
-if(!class_exists('Form_ElementModel'))
-	require __DIR__'/../ElementModel.class.php';
-
-class Form_Elements_ConditionModel extends Form_ElementModel
+class Form_Elements_Condition extends Form_Element
 {
 	/**
 	 * @var array name of configurations
@@ -18,7 +15,7 @@ class Form_Elements_ConditionModel extends Form_ElementModel
 	 * checks given value can pass the conditions or not
 	 *
 	 * @param mixed $value
-	 * @throws Form_ValidationExceptionModel if condition check fails
+	 * @throws Form_ValidationException if condition check fails
 	 * @return mixed
 	 */
 	public function setValue($value)
@@ -62,11 +59,9 @@ class Form_Elements_ConditionModel extends Form_ElementModel
 				break;
 		}
 		if($failure)
-			throw $this->getContext()->getModel('ValidationException', 'Form', array(
-				array(
-					'' => 'condition failed'
-				)
-			));
+			throw new Form_ValidationException(array(
+                '' => 'condition failed'
+            ));
 		return $value;
 	}
 

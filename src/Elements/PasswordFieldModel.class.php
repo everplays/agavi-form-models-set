@@ -1,9 +1,6 @@
 <?php
 
-if(!class_exists('Form_Elements_TextFieldModel'))
-	require __DIR__.'/TextFieldModel.class.php';
-
-class Form_Elements_PasswordFieldModel extends Form_Elements_TextFieldModel
+class Form_Elements_PasswordField extends Form_Elements_TextField
 {
 	/**
 	 * generates html for element
@@ -30,6 +27,5 @@ class Form_Elements_PasswordFieldModel extends Form_Elements_TextFieldModel
 		}
 		return $return;
 	}
-
 }
 

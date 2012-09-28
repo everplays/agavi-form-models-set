@@ -1,9 +1,6 @@
 <?php
 
-if(!class_exists('Form_ElementModel'))
-	require __DIR__'/../ElementModel.class.php';
-
-class Form_Elements_FieldsetModel extends Form_ElementModel
+class Form_Elements_Fieldset extends Form_Element
 {
 	/**
 	 * @var boolean ability to have children
@@ -28,9 +25,9 @@ class Form_Elements_FieldsetModel extends Form_ElementModel
 	/**
 	 * adds Child to container
 	 *
-	 * @param Form_ElementModel $Child child to be added
+	 * @param Form_Element $Child child to be added
 	 */
-	public function addChild(Form_ElementModel $Child)
+	public function addChild(Form_Element $Child)
 	{
 		$cp = (array) $Child->parents; // child parents
 		$fp = (array) $this->parents; // fieldset parents
@@ -49,7 +46,7 @@ class Form_Elements_FieldsetModel extends Form_ElementModel
 	 * returns Child by given id
 	 *
 	 * @param int $id id of Child
-	 * @return Form_ElementModel Child or null
+	 * @return Form_Element Child or null
 	 */
 	public function getChildById($id)
 	{
@@ -62,7 +59,7 @@ class Form_Elements_FieldsetModel extends Form_ElementModel
 	 * returns Child by given name
 	 *
 	 * @param string $name name of Child
-	 * @return Form_ElementModel Child or null
+	 * @return Form_Element Child or null
 	 */
 	public function getChildByName($name)
 	{
@@ -85,7 +82,7 @@ class Form_Elements_FieldsetModel extends Form_ElementModel
 	 * removes an Child by id
 	 *
 	 * @param int $id id of Child
-	 * @return Form_ElementModel removed Child or null
+	 * @return Form_Element removed Child or null
 	 */
 	public function removeChildById($id)
 	{
@@ -104,7 +101,7 @@ class Form_Elements_FieldsetModel extends Form_ElementModel
 	 * removes an Child by name
 	 *
 	 * @param string $name name of Child
-	 * @return Form_ElementModel removed Child or null
+	 * @return Form_Element removed Child or null
 	 */
 	public function removeChildByName($name)
 	{
@@ -122,8 +119,8 @@ class Form_Elements_FieldsetModel extends Form_ElementModel
 	/**
 	 * removes an Child
 	 *
-	 * @param Form_ElementModel $Child Child to get removed
-	 * @return Form_ElementModel removed Child or null
+	 * @param Form_Element $Child Child to get removed
+	 * @return Form_Element removed Child or null
 	 */
 	public function removeChild($Child)
 	{
@@ -191,17 +188,10 @@ class Form_Elements_FieldsetModel extends Form_ElementModel
 	 * parses children & adds them into given fieldset
 	 *
 	 * @param object $config
-	 * @param Form_Elements_FieldsetModel $container fieldset
+	 * @param Form_Elements_Fieldset $container fieldset
 	 */
-	public static function parseChildren($config, Form_Elements_FieldsetModel $container)
+	public static function parseChildren($config, Form_Elements_Fieldset $container)
 	{
-		$contextProfile = AgaviConfig::get('core.default_context');
-		if(is_null($contextProfile))
-		{
-			$contextProfile = md5(microtime());
-			AgaviConfig::set('core.default_context', $contextProfile);
-		}
-		$context = AgaviContext::getInstance();
 		if(isset($config->items) and is_array($config->items))
 		{
 			foreach($config->items as $item)
@@ -212,37 +202,37 @@ class Form_Elements_FieldsetModel extends Form_ElementModel
 					{
 						case 'textfield':
 							if(isset($item->inputType) and $item->inputType=='password')
-								$model = array('Elements.PasswordField', 'Form');
+								$model = 'Form_Elements_PasswordField';
 							else
-								$model = array('Elements.TextField', 'Form');
+								$model = 'Form_Elements_TextField';
 							break;
 						case 'numberfield':
-							$model = array('Elements.NumberField', 'Form');
+							$model = 'Form_Elements_NumberField';
 							break;
 						case 'combo':
-							$model = array('Elements.ResourceField', 'Form');
+							$model = 'Form_Elements_ResourceField';
 							break;
 						case 'datefield':
-							$model = array('Elements.DateField', 'Form');
+							$model = 'Form_Elements_DateField';
 							break;
 						case 'radiogroup':
-							$model = array('Elements.RadioGroup', 'Form');
+							$model = 'Form_Elements_RadioGroup';
 							break;
 						case 'checkbox':
-							$model = array('Elements.Checkbox', 'Form');
+							$model = 'Form_Elements_Checkbox';
 							break;
 						case 'fieldset':
-							$model = Form_Elements_FieldsetModel::fromJson($item, $container);
+							$model = Form_Elements_Fieldset::fromJson($item, $container);
 							break;
 						case 'textarea':
-							$model = array('Elements.TextArea', 'Form');
+							$model = 'Form_Elements_TextArea';
 							break;
 						default:
 							$model = null;
 					}
-					if(is_array($model))
+					if(is_string($model))
 					{
-						$el = $context->getModel($model[0], $model[1], array($item, $container));
+						$el = $model($item, $container);
 						$container->addChild($el);
 					}
 					elseif(!is_null($model))
@@ -258,19 +248,12 @@ class Form_Elements_FieldsetModel extends Form_ElementModel
 	 * parses config object from extjs
 	 *
 	 * @param object $config lazy configuration of extjs
-	 * @param Form_FormModel $form
-	 * @return Form_Elements_FieldsetModel
+	 * @param Form_Form $form
+	 * @return Form_Elements_Fieldset
 	 */
-	public static function fromJson($config, Form_Elements_FieldsetModel $form=null)
+	public static function fromJson($config, Form_Elements_Fieldset $form=null)
 	{
-		$contextProfile = AgaviConfig::get('core.default_context');
-		if(is_null($contextProfile))
-		{
-			$contextProfile = md5(microtime());
-			AgaviConfig::set('core.default_context', $contextProfile);
-		}
-		$context = AgaviContext::getInstance();
-		$fieldset = $context->getModel('Elements.Fieldset', 'Form', array($config, $form));
+		$fieldset = new Form_Elements_Fieldset($config, $form);
 		$children = array();
 		$columns = count($config->items);
 		$rows = count($config->items[0]->items);

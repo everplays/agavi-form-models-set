@@ -1,9 +1,6 @@
 <?php
 
-if(!class_exists('Form_Elements_TextFieldModel'))
-	require __DIR__'/TextFieldModel.class.php';
-
-class Form_Elements_TextAreaModel extends Form_Elements_TextFieldModel
+class Form_Elements_TextArea extends Form_Elements_TextField
 {
 	/**
 	 * generates special html markup / js for needed validation

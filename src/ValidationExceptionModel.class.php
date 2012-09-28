@@ -1,6 +1,6 @@
 <?php
 
-class Form_ValidationExceptionModel extends Exception
+class Form_ValidationException extends Exception
 {
 	/**
 	 * @var array holes errors that field has
