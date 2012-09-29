@@ -1,0 +1,9 @@
+{{#t}}
+<div class="{{elementClass}}" id="{{idPrefix}}{{id}}_container">
+    <label for="{{idPrefix}}{{id}}">{{title}}:</label>
+    <div class="input">
+        <input type="checkbox" name="{$this->name} id="{{idPrefix}}{{id}}" {{#value}}checked="checked"{{/value}} {{#man}}maxlength="{{.}}"{{/man}} {{#readonly}}readonly="readonly"{{/readonly}} {{#disabled}}disabled="disabled"{{/disabled}} />
+        {{#description}}<span class="help-block">{{.}}</span>{{/description}}
+    </div>
+</div>
+{{/t}}
