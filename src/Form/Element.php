@@ -66,7 +66,7 @@ abstract class Form_Element
 		if(is_array($configuration) or is_object($configuration))
 			foreach($configuration as $name => $value)
 			{
-				$this->{$name} = $value;
+				$this->__set($name, $value);
 			}
 	}
 
@@ -182,7 +182,7 @@ abstract class Form_Element
 		// if specific validation existed would go here & if
 		// anything goes wrong will put error message into errors
 		if(!empty($errors))
-			throw Form_ValidationException($errors);
+			throw new Form_ValidationException($errors);
 		return $value;
 	}
 }
