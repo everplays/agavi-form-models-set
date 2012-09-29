@@ -27,8 +27,13 @@ class Form_Elements_PasswordField extends Form_Elements_TextField
 		$errors = parent::getValidationErrors($value);
 		
 		if (isset($this->equal)) {
-			$other = $this->form->getChildById($this->equal);
-            if ($other->value != $value) {
+			$other = $this->form->getChildByName($this->equal);
+			if (!$other) {
+                $errors['equal'] = json_encode(array(
+                                                 'msg' => "field %s dose not exist",
+                                                 'arguments' => array($this->equal)
+                                                 ));    				
+			} elseif ($other->value != $value) {
                 $errors['equal'] = json_encode(array(
                                                  'msg' => "must be equal with %s field",
                                                  'arguments' => array($this->equal)
