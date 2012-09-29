@@ -153,11 +153,20 @@ abstract class Form_Element
 	public function html(AgaviRenderer $renderer=null)
 	{
 		$this->setRendered(true);
-		if(is_null($renderer))
+		if(is_null($renderer)) {
+			if (!isset($this->form->renderer)) {
+				throw new Exception("Set renderer before call html");
+			}
 			$renderer = $this->form->renderer;
+		}
 		$extension = $renderer->getDefaultExtension();
 		$class = preg_replace("/^Form_Elements_|^Form_/", '', get_class($this));
 		return $renderer->getEngine()->render("Form/{$class}", array("t" => $this));
+	}
+	
+	public function __toString()
+	{
+		return $this->html();
 	}
 
 	/**
