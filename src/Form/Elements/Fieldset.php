@@ -150,41 +150,6 @@ class Form_Elements_Fieldset extends Form_Element
 	}
 
 	/**
-	 * generates html presentation of element
-	 *
-	 * @return string generated html for element
-	 * @param string $client javascript client library - for validation purpose
-	 */
-	public function html($client=null)
-	{
-		$this->setRendered(true);
-		$id = self::idPrefix.$this->id;
-		$return  = '<div class="'.self::elementClass.'">';
-		$result = "<fieldset ".
-			"id=\"{$id}_container\" ".
-			">";
-		if(isset($this->title))
-		{
-			$result .= "<legend>{$this->title}</legend>";
-		}
-		// children level 2 or deeper will be at the end of list so
-		// when their parent get rendered they will be rendered too
-		foreach($this->children as $child)
-		{
-			$child->setRendered(false);
-		}
-		foreach($this->children as $child)
-		{
-			if(!$child->isRendered())
-			{
-				$result .= $child->html($client);
-			}
-		}
-		$result .= '</fieldset>';
-		return $result;
-	}
-
-	/**
 	 * parses children & adds them into given fieldset
 	 *
 	 * @param object $config
@@ -277,5 +242,21 @@ class Form_Elements_Fieldset extends Form_Element
 				$form->addChild($child);
 			}
 		return $fieldset;
+	}
+
+	/**
+	 * generates html of form
+	 *
+	 * @param AgaviRenderer $renderer the templating engine that will be used for rendering element by calling render method of it
+	 * @return string
+	 */
+	public function html(AgaviRenderer $renderer=null)
+	{
+		$this->setRendered(true);
+		foreach($this->children as $child)
+		{
+			$child->setRendered(false);
+		}
+		return parent::html($renderer);
 	}
 }

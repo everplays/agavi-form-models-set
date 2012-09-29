@@ -1,0 +1,10 @@
+{{#t}}
+<form id="{{idPrefix}}{{id}}" action="{{action}}" enctype="multipart/form-data" method="{{method}}">
+{{#getChildren}}
+    {{^isRendered}}
+        {{{html}}}
+    {{/isRendered}}
+{{/getChildren}}
+<input type="submit" value="{{submit}}" class="btn primary" />
+</form>
+{{/t}}

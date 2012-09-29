@@ -2,8 +2,8 @@
 
 abstract class Form_Element
 {
-	const idPrefix = 'atras-el-';
-	const elementClass = 'clearfix';
+	public $idPrefix = 'xamin-el-';
+	public $elementClass = 'clearfix';
 
 	/**
 	 * @var array name of configurations
@@ -147,10 +147,18 @@ abstract class Form_Element
 	 * generates html presentation of element
 	 * rendered must be set to true after execution
 	 *
-	 * @param string $client javascript client library - for validation purposes
+	 * @param AgaviRenderer $renderer the templating engine that will be used for rendering element by calling render method of it
 	 * @return string
 	 */
-	abstract public function html($client=null);
+	public function html(AgaviRenderer $renderer=null)
+	{
+		$this->setRendered(true);
+		if(is_null($renderer))
+			$renderer = $this->form->renderer;
+		$extension = $renderer->getDefaultExtension();
+		$class = preg_replace("/^Form_Elements_|^Form_/", '', get_class($this));
+		return $renderer->getEngine()->render("Form/{$class}", array("t" => $this));
+	}
 
 	/**
 	 * returns validation errors

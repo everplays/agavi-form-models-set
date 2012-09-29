@@ -60,7 +60,6 @@ class Form_Elements_TextField extends Form_Element
 						$this->regex = '/'.$this->regex.'/';
 					elseif(strpos($this->regex, '~')===false)
 						$this->regex = '~'.$this->regex.'~';
-
 				}
 			}
 			if(isset($this->regex) and !preg_match($this->regex, $value))
@@ -73,75 +72,5 @@ class Form_Elements_TextField extends Form_Element
 			$errors['readonly'] = 'this element is readonly';
 		}
 		return $errors;
-	}
-
-	/**
-	 * generates special html markup / js for needed validation
-	 *
-	 * @param string $html html syntax of element
-	 * @return string final element
-	 */
-	public function jQueryValidationEngine($html)
-	{
-		$validation = array();
-		if($this->required===true)
-		{
-			$validation[] = 'required';
-		}
-		if(isset($this->min) and $this->min>0)
-		{
-			$validation[] = "minSize[{$this->min}]";
-		}
-		if(isset($this->max) and $this->max>0)
-		{
-			$validation[] = "maxSize[{$this->max}]";
-		}
-		if(isset($this->regex))
-		{
-			$validation[] = "custom[el{$this->id}]";
-			$regex = json_encode($this->regex);
-			$html .= <<<HERE
-<script type="text/javascript">
-//<![CDATA[
-(function($){
-	if($ && $.validationEngineLanguage)
-	{
-		$.validationEngineLanguage.allRules.el{$this->id} = {};
-		$.validationEngineLanguage.allRules.el{$this->id}.regex = new RegExp({$regex});
-	}
-})(jQuery);
-//]]>
-</script>
-HERE;
-		}
-		if(!empty($validation))
-			$html = str_replace("<input", "<input class=\"validate[".implode(',', $validation)."]\"", $html);
-		return $html;
-	}
-
-	/**
-	 * generates html for element
-	 *
-	 * @param string $client javascript client library - for validation purpose
-	 * @return string generated html for element
-	 */
-	public function html($client=null)
-	{
-		$this->setRendered(true);
-		$id = self::idPrefix.$this->id;
-		$return  = '<div class="'.self::elementClass."\" id=\"{$id}_container\">";
-		$return .= "<label for=\"".self::idPrefix."{$this->id}\">{$this->title}:</label>";
-		$return .= "<div class=\"input\">";
-		$return .= "<input type=\"text\" name=\"{$this->name}\" ".
-			"id=\"{$id}\" value=\"".htmlspecialchars($this->value)."\" ".
-			(isset($this->min)?"maxlength=\"{$this->max}\" ":'').
-			($this->readonly===true?'readonly="readonly" ':'').
-			($this->disabled===true?'disabled="disabled" ':'').
-			"/></div></div>";
-		if(!is_null($client) and is_callable(array($this, $client)))
-		{
-			$return = $this->{$client}($return);
-		}
-		return $return;
 	}
 }

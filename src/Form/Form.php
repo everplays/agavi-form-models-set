@@ -13,89 +13,32 @@ class Form_Form extends Form_Elements_Fieldset
 				'submit' => 'is_string',
 				'description' => 'is_string',
 				'action' => 'is_string',
-				'method' => 'is_string'
+				'method' => 'is_string',
+				'renderer' => __CLASS__.'::is_agavi_renderer'
 			)
 		);
 		parent::__construct($configuration, $form);
 	}
 
+	public static function is_agavi_renderer($v)
+	{
+		return $v instanceof AgaviRenderer;
+	}
+
 	/**
 	 * generates html of form
 	 *
-	 * @return string generated html for element
-	 * @param string $client javascript client library - for validation purpose
+	 * @param AgaviRenderer $renderer the templating engine that will be used for rendering element by calling render method of it
+	 * @return string
 	 */
-	public function html($client=null)
+	public function html(AgaviRenderer $renderer=null)
 	{
 		$this->setRendered(true);
-		// children level 2 or deeper will be at the end of list so
-		// when their parent get rendered they will be rendered too
 		foreach($this->children as $child)
 		{
 			$child->setRendered(false);
 		}
-		$result = "<form id=\"".self::idPrefix."-{$this->id}\" enctype=\"multipart/form-data\" ";
-		if(isset($this->action))
-			$result .= "action=\"".$this->action."\" ";
-		$method = 'post';
-		if(isset($this->method))
-			$method = strtolower($this->method);
-		$result .= "method=\"{$method}\" ";
-		$result .= ">";
-		foreach($this->children as $child)
-		{
-			if(!$child->isRendered())
-			{
-				$result .= $child->html($client);
-			}
-		}
-		if(isset($this->submit))
-			$result .= "<input type=\"submit\" value=\"{$this->submit}\" class=\"btn primary\" />";
-		$result .="</form>";
-		if(isset($this->description) || isset($this->title))
-		{
-			$result  = "<div class=\"row\"><div class=\"span4\">".
-				(isset($this->title)?"<h2>{$this->title}</h2>":'').
-				(isset($this->description)?"<p>{$this->description}</p>":'').
-				"</div><div class=\"span12\">".
-				$result."</div></div>";
-		}
-		if(!is_null($client) and is_callable(array($this, $client)))
-		{
-			$result = $this->{$client}($result);
-		}
-		return $result;
-	}
-
-	/**
-	 * generates special html markup / js for needed validation
-	 *
-	 * @param string $html html syntax of element
-	 * @return string final element
-	 */
-	public function jQueryValidationEngine($html)
-	{
-		$prefix = self::idPrefix;
-		$html .= <<<HERE
-<script type="text/javascript">
-jQuery(document).ready(function(){
-	jQuery("#{$prefix}-{$this->id}").validationEngine();
-
-HERE;
-		foreach($this->children as $child)
-		{
-			if(isset($child->parents))
-			{
-				foreach($child->parents as $parent => $condition)
-				{
-					$parent = '#'.self::idPrefix.$parent;
-					$id = self::idPrefix.$child->id;
-					$html .= "$('#{$id}_container').ConditionManager(".json_encode($parent).", ".json_encode($condition).");\n";
-				}
-			}
-		}
-		$html .= '});</script>';
-		return $html;
+		return parent::html($this->renderer);
 	}
 
 	/**
