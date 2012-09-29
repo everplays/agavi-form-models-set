@@ -1,0 +1,17 @@
+{{#t}}
+<div class="{{elementClass}}" id="{{idPrefix}}{{id}}_container\">";
+    <label>{{title}}:</label>
+    <div class="input">
+        <ul class="inputs-list">
+            {{#items}}
+                <li>
+                    <label>
+                        <input type="radio" name="{{name}}" value="{{value}}" {{#checked}}checked="checked"{{/checked}} {{#readonly}}readonly="readonly"{{/readonly}} {{#disabled}}disabled="disabled"{{/disabled}} id="{{idPrefix}}{{id}}" />
+                        <span>{{label}}</span>
+                    </label>
+                </li>
+            {{/items}}
+        </ul>
+    </div>
+</div>
+{{/t}}

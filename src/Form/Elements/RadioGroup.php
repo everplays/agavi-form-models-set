@@ -43,53 +43,21 @@ class Form_Elements_RadioGroup extends Form_Element
 	}
 
 	/**
-	 * generates special html markup / js for needed validation
+	 * generates html presentation of element
+	 * rendered must be set to true after execution
 	 *
-	 * @param string $html html syntax of element
-	 * @return string final element
+	 * @param AgaviRenderer $renderer the templating engine that will be used for rendering element by calling render method of it
+	 * @return string
 	 */
-	public function jQueryValidationEngine($html)
+	public function html(AgaviRenderer $renderer=null)
 	{
-		$validation = array();
-		if($this->required===true)
-		{
-			$validation[] = 'required';
-		}
-		if(!empty($validation))
-			$html = str_replace("<input", "<input class=\"validate[".implode(',', $validation)."]\"", $html);
-		return $html;
-	}
-
-	/**
-	 * generates html for element
-	 *
-	 * @param string $client javascript client library - for validation purpose
-	 * @return string generated html for element
-	 */
-	public function html($client=null)
-	{
-		$this->setRendered(true);
-		$id = self::idPrefix.$this->id;
-		$return  = '<div class="'.self::elementClass."\" id=\"{$id}_container\">";
-		$return .= "<label>{$this->title}:</label>";
-		$return .= "<div class=\"input\"><ul class=\"inputs-list\">";
 		$i = 0;
-		foreach($this->items as $item)
+		for($this->items as &$item)
 		{
-			$option = "<li><label>".
-				"<input type=\"radio\" name=\"{$this->name}\" ".
-				"value=\"{$item->value}\" id=\"{$id}_".$i++."\" ".
-				($this->value==$item->value?'checked="checked" ':'').
-				($this->readonly===true?'readonly="readonly" ':'').
-				($this->disabled===true?'disabled="disabled" ':'').
-				"/><span>{$item->label}</span></label></li>";
-			if(!is_null($client) and is_callable(array($this, $client)))
-			{
-				$return .= $this->{$client}($option);
-			}
+			$item->checked = $item->value == $this->value;
+			$item->id = $i++;
 		}
-		$return .= "</ul></div></div>";
-		return $return;
+		return parent::render($renderer);
 	}
 
 	/**
