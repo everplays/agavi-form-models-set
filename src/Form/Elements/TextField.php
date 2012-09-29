@@ -67,6 +67,13 @@ class Form_Elements_TextField extends Form_Element
 				$errors['pattern'] = 'value does not match the pattern';
 			}
 		}
+		
+		if (isset($this->email) && $this->email) {
+			$extraChars = preg_quote('!#$%&\'*+-/=?^_`{|}~', '/');
+			if(!preg_match('/^[a-z0-9' . $extraChars . ']+(\.[a-z0-9' . $extraChars . ']+)*@[a-z0-9-]+(\.[a-z0-9-]+)*\.[a-z]{2,6}$/iD', $value)) {
+				$errors['email'] = 'this must be an email address';
+			}
+		}
 		if(isset($this->defaultValue) and !empty($this->readonly) and $value!=$this->defaultValue)
 		{
 			$errors['readonly'] = 'this element is readonly';
