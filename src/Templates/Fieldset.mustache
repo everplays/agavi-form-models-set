@@ -1,0 +1,12 @@
+{{#t}}
+<div class="{{elementClass}}>
+    <fieldset id="{{idPrefix}}{{id}}_container">
+        {{#title}}<legend>{{.}}</legend>{{/title}}
+        {{#getChildren}}
+            {{^isRendered}}
+                {{html}}
+            {//isRendered}}
+        {{/getChildren}}
+    </fieldset>
+</div>
+{{/t}}

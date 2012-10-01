@@ -75,15 +75,4 @@ class Form_Elements_Condition extends Form_Element
 	{
 		return array();
 	}
-
-	/**
-	 * generates html for element
-	 *
-	 * @param string $client client validation
-	 * @return string
-	 */
-	public function html($client=null)
-	{
-		return '';
-	}
 }

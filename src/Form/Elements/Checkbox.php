@@ -42,55 +42,6 @@ class Form_Elements_Checkbox extends Form_Element
 	}
 
 	/**
-	 * generates special html markup / js for needed validation
-	 *
-	 * @param string $html html syntax of element
-	 * @return string final element
-	 */
-	public function jQueryValidationEngine($html)
-	{
-		$validation = array();
-		if($this->required===true)
-		{
-			$validation[] = 'required';
-		}
-		if(!empty($validation))
-			$html = str_replace("<input", "<input class=\"validate[".implode(',', $validation)."]\"", $html);
-		return $html;
-	}
-
-	/**
-	 * generates html for element
-	 *
-	 * @param string $client javascript client library - for validation purpose
-	 * @return string generated html for element
-	 */
-	public function html($client=null)
-	{
-		$this->setRendered(true);
-		$id = self::idPrefix.$this->id;
-		$return  = '<div class="'.self::elementClass."\" id=\"{$id}_container\">";
-		$return .= "<label for=\"{$id}\">";
-		$return .= !empty($this->title)?$this->title.':':'';
-		$return .= "</label>";
-		$return .= "<div class=\"input\">";
-		$return .= "<input type=\"checkbox\" name=\"{$this->name}\" ".
-			"id=\"{$id}\" ".($this->value?"checked=\"checked\" ":'').
-			(isset($this->min)?"maxlength=\"{$this->max}\" ":'').
-			($this->readonly===true?'readonly="readonly" ':'').
-			($this->disabled===true?'disabled="disabled" ':'').
-			"/>";
-		if(isset($this->description) and !empty($this->description))
-			$return .= "<span class=\"help-block\">{$this->description}</span>";
-		$return .= "</div></div>";
-		if(!is_null($client) and is_callable(array($this, $client)))
-		{
-			$return = $this->{$client}($return);
-		}
-		return $return;
-	}
-
-	/**
 	 * registers validators for element
 	 *
 	 * @param AgaviValidationManager $vm instance of AgaviValidationManager to register validators on it

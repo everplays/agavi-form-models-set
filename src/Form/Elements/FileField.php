@@ -54,49 +54,6 @@ class Form_Elements_FileField extends Form_Element
 	}
 
 	/**
-	 * generates specific html markup / js for client validation
-	 *
-	 * @param string $html html markup of element
-	 * @return string final element
-	 */
-	public function jQueryValidationEngine($html)
-	{
-		$validation = array();
-		if($this->required===true)
-		{
-			$validation[] = 'required';
-		}
-		if(!empty($validation))
-			$html = str_replace("\" class=\"", "\" class=\"validate[".implode(',', $validation)."] ", $html);
-		return $html;
-	}
-
-	/**
-	 * generates html for element
-	 *
-	 * @param string $client javascript client library - for validation purpose
-	 * @return string generated html for element
-	 */
-	public function html($client=null)
-	{
-		$this->setRendered(true);
-		$id = self::idPrefix.$this->id;
-		$return  = '<div class="'.self::elementClass."\" id=\"{$id}_container\">";
-		$return .= "<label for=\"".self::idPrefix."{$this->id}\">{$this->title}:</label>";
-		$return .= "<div class=\"input\">";
-		$return .= "<input type=\"file\" name=\"{$this->name}\" class=\"input-file\" ".
-			"id=\"{$id}\" ".
-			($this->readonly===true?'readonly="readonly" ':'').
-			($this->disabled===true?'disabled="disabled" ':'').
-			"/></div></div>";
-		if(!is_null($client) and is_callable(array($this, $client)))
-		{
-			$return = $this->{$client}($return);
-		}
-		return $return;
-	}
-
-	/**
 	 * register special validators of this element on validation manager
 	 *
 	 * @param AgaviValidationManager $vm instance of AgaviValidationManager to register validators on it
