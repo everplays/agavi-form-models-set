@@ -1,6 +1,6 @@
 {{#t}}
 <div class="{{elementClass}}" id="{{idPrefix}}{{id}}_container\">";
-    <label>{{title}}:</label>
+    {{#title}}<label>{{.}}:</label>{{/title}}
     <div class="input">
         <ul class="inputs-list">
             {{#items}}

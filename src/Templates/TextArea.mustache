@@ -1,6 +1,6 @@
 {{#t}}
 <div class="{{elementClass}}" id="{{idPrefix}}{{id}}_container">
-    <label for="{{idPrefix}}{{id}}">{{title}}:</label>
+    {{#title}}<label for="{{idPrefix}}{{id}}">{{.}}:</label>{{/title}}
     <div class="input">
         <textarea name="{{name}}" id="{{idPrefix}}{{id}}" rows="5" cols="80" {{#readonly}}readonly="readonly"{{/readonly}} {{#disabled}}disabled="disabled"{{/disabled}}>{{value}}</textarea>
     </div>

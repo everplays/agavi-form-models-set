@@ -1,5 +1,5 @@
 <div class="{{elementClass}}" id="{{idPrefix}}{id}_container">
-    <label for="{{idPrefix}}{{id}}">{{title}}:</label>
+    {{#title}}<label for="{{idPrefix}}{{id}}">{{.}}:</label>{{/title}}
     <div class="input">
         <input type="text" name="{{name}}" id="{{idPrefix}}{{id}}" value="{{value}}" {{#readonly}}readonly="readonly"{{/readonly}} {{#disabled}}disabled="disabled"{{/disabled}} />
     </div>
