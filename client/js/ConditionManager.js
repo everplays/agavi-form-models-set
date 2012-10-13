@@ -24,7 +24,7 @@
 		},
 		check: function(val, term)
 		{
-			switch(term.opration)
+			switch(term.operation)
 			{
 				case '==':
 					if(val==term.condition)

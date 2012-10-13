@@ -7,7 +7,7 @@ class Form_Elements_Condition extends Form_Element
 	 */
 	protected $configDefinition = array(
 		'condition' => false,
-		'opration' => false,
+		'operation' => false,
 		'value' => false
 	);
 
@@ -21,7 +21,7 @@ class Form_Elements_Condition extends Form_Element
 	public function setValue($value)
 	{
 		$failure = true;
-		switch($this->opration)
+		switch($this->operation)
 		{
 			case '==':
 				if($value==$this->condition)

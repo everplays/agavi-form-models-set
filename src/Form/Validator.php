@@ -13,7 +13,7 @@ class Form_Validator extends AgaviValidator
 			$depends = array();
 			foreach($parents as $id => $condition)
 			{
-				$depend = bin2hex("{$id}_{$condition['opration']}_{$condition['condition']}");
+				$depend = bin2hex("{$id}_{$condition['operation']}_{$condition['condition']}");
 				$parent = $form->getChildById($id);
 				if(is_null($parent))
 				{

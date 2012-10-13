@@ -52,12 +52,12 @@ class Form_Elements_RadioGroup extends Form_Element
 	public function html(AgaviRenderer $renderer=null)
 	{
 		$i = 0;
-		for($this->items as &$item)
+		foreach($this->items as $item)
 		{
-			$item->checked = $item->value == $this->value;
-			$item->id = $i++;
+			$item['checked'] = $item['value'] == $this->value;
+			$item['id'] = $i++;
 		}
-		return parent::render($renderer);
+		return parent::html($renderer);
 	}
 
 	/**

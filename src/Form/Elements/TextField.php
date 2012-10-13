@@ -18,7 +18,8 @@ class Form_Elements_TextField extends Form_Element
 				'readonly' => 'is_bool',
 				'disabled' => 'is_bool',
 				'defaultValue' => 'is_string',
-				'email' => 'is_bool'
+				'email' => 'is_bool',
+                'equal' => 'is_string',
 			)
 		);
 		parent::__construct($configuration, $form);

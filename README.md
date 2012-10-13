@@ -96,7 +96,7 @@ How to use it?
 			'parents' => array(
 				// will be validated if hasEmail has been checked
 				5 => array(
-					'opration' => '==',
+					'operation' => '==',
 					'condition' => true
 				)
 			),
