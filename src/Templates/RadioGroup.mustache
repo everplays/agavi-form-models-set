@@ -1,12 +1,19 @@
 {{#t}}
-<div class="{{elementClass}}" id="{{idPrefix}}{{id}}_container\">";
+<script language="javascript">
+    jQuery.validator.addClassRules("rules-{{idPrefix}}{{id}}", {
+    {{#required}}
+        required: true,
+    {{/required}}
+    });
+</script>
+<div class="{{elementClass}}" id="{{idPrefix}}{{id}}_container">
     {{#title}}<label>{{.}}:</label>{{/title}}
     <div class="input">
         <ul class="inputs-list">
             {{#items}}
                 <li>
                     <label>
-                        <input type="radio" name="{{name}}" value="{{value}}" {{#checked}}checked="checked"{{/checked}} {{#readonly}}readonly="readonly"{{/readonly}} {{#disabled}}disabled="disabled"{{/disabled}} id="{{idPrefix}}{{id}}" />
+                        <input type="radio" name="{{name}}" value="{{value}}" {{#checked}}checked="checked"{{/checked}} {{#readonly}}readonly="readonly"{{/readonly}} {{#disabled}}disabled="disabled"{{/disabled}} class="rules-{{idPrefix}}{{id}}" />
                         <span>{{label}}</span>
                     </label>
                 </li>
