@@ -2,25 +2,27 @@
 
 class Form_ValidationException extends Exception
 {
-	/**
-	 * @var array holes errors that field has
-	 */
-	protected $validationErrors = array();
+    /**
+     * @var array holes errors that field has
+     */
+    protected $validationErrors = array();
 
-	/**
-	 * constcutor
-	 */
-	public function __construct(array $errors)
-	{
-		$this->validationErrors = $errors;
-		parent::__construct('element validation failed');
-	}
+    /**
+     * constcutor
+     */
+    public function __construct(array $errors)
+    {
+        $this->validationErrors = $errors;
+        parent::__construct('element validation failed');
+    }
 
-	/**
-	 * returns errors that happened during validation
-	 */
-	public function getValidationErrors()
-	{
-		return $this->validationErrors;
-	}
+    /**
+     * returns errors that happened during validation
+     *
+     * @return Error that happened during validation
+     */
+    public function getValidationErrors()
+    {
+        return $this->validationErrors;
+    }
 }
