@@ -7,4 +7,9 @@
 {{/getChildren}}
 <input type="submit" value="{{submit}}" class="btn primary" />
 </form>
+<script language="javascript">
+    $(document).ready(function() {
+        $("#{{idPrefix}}{{id}}").validate();
+    });
+</script>
 {{/t}}
