@@ -24,17 +24,16 @@ class Form_Elements_DateField extends Form_Element
      * returns validation errors
      *
      * @param mixed $value value that must be validated
+     *
      * @return array assocc-array of errors (empty array on success)
      */
     public function getValidationErrors($value)
     {
         $errors = array();
-        if($this->required===true and empty($value))
-        {
+        if ($this->required === true and empty($value)) {
             $errors['required'] = 'this element is required';
         }
-        if(isset($this->defaultValue) and !empty($this->readonly) and $value!=$this->defaultValue)
-        {
+        if (isset($this->defaultValue) and !empty($this->readonly) and $value != $this->defaultValue) {
             $errors['readonly'] = 'this element is readonly';
         }
         return $errors;
@@ -44,14 +43,17 @@ class Form_Elements_DateField extends Form_Element
      * prepare date before checking validation
      *
      * @param mixed $value
+     *
      * @return int
      */
     public function setValue($value)
     {
-        if(is_numeric($value))
+        if (is_numeric($value)) {
             $value = (int) $value;
-        if(is_string($value))
+        }
+        if (is_string($value)) {
             $value = strtotime($value);
+        }
         $value = date('Y/m/d', $value);
         $value = parent::setValue($value);
         return $value;

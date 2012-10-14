@@ -27,7 +27,8 @@ class Form_Elements_ResourceField extends Form_Element
     /**
      * checks type of source
      *
-     * @param mixed $source
+     * @param mixed $source Source
+     *
      * @return bool $source could be string or array
      */
     public static function is_source($source)
@@ -39,17 +40,16 @@ class Form_Elements_ResourceField extends Form_Element
      * returns validation errors
      *
      * @param mixed $value value that must be validated
+     *
      * @return array assocc-array of errors (empty array on success)
      */
     public function getValidationErrors($value)
     {
         $errors = array();
-        if($this->required===true and !isset($value))
-        {
+        if ($this->required === true and !isset($value)) {
             $errors['required'] = 'this element is required';
         }
-        if(isset($this->defaultValue) and !empty($this->readonly) and $value!=$this->defaultValue)
-        {
+        if (isset($this->defaultValue) and !empty($this->readonly) and $value != $this->defaultValue) {
             $errors['readonly'] = 'this element is readonly';
         }
         return $errors;
@@ -58,8 +58,9 @@ class Form_Elements_ResourceField extends Form_Element
     /**
      * prepares value before regular check
      *
-     * @param mixed $value
-     * return int
+     * @param mixed $value Input
+     *
+     * @return int
      */
     public function setValue($value)
     {

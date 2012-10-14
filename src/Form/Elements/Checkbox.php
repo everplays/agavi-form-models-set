@@ -25,17 +25,16 @@ class Form_Elements_Checkbox extends Form_Element
      * returns validation errors
      *
      * @param mixed $value value that must be validated
+     *
      * @return array assocc-array of errors (empty array on success)
      */
     public function getValidationErrors($value)
     {
         $errors = array();
-        if($this->required===true and !$value)
-        {
+        if ($this->required === true and !$value) {
             $errors['required'] = 'this element is required';
         }
-        if(isset($this->defaultValue) and !empty($this->readonly) and $value!=$this->defaultValue)
-        {
+        if (isset($this->defaultValue) and !empty($this->readonly) and $value != $this->defaultValue) {
             $errors['readonly'] = 'this element is readonly';
         }
         return $errors;
@@ -44,9 +43,11 @@ class Form_Elements_Checkbox extends Form_Element
     /**
      * registers validators for element
      *
-     * @param AgaviValidationManager $vm instance of AgaviValidationManager to register validators on it
-     * @param array $depends depends parameter of validations that get registered
-     * @param array $parameters
+     * @param AgaviValidationManager $vm         instance of AgaviValidationManager to register validators on it
+     * @param array                  $depends    depends parameter of validations that get registered
+     * @param array                  $parameters Params  
+     *
+     * @return void
      */
     public function registerValidators(AgaviValidationManager $vm, array $depends, array $parameters=array())
     {
