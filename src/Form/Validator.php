@@ -1,7 +1,46 @@
 <?php
 
+/**
+  * Class implementing the Agavi validator
+  * 
+  * PHP version 5.3
+  *
+  * @category  Xamin
+  * @package   XaminApplianceMarket
+  * @author    Alireza Ghafouri <fzerorubigd@gmail.com>
+  * @author    Behrooz Shabani <everplays@gmail.com>
+  * @author    Koosha Khajeh Moogahi <koosha.khajeh@gmail.com>
+  * @copyright 2012 (c) ParsPooyesh Co
+  * @license   GNU GPLv3+ <http://www.gnu.org/licenses/gpl-3.0.html>
+  * @link      http://www.xamin.ir
+  *
+  */
+
+/**
+  * Class implementing the Agavi validator
+  *
+  * @category  Xamin
+  * @package   XaminApplianceMarket
+  * @author    Alireza Ghafouri <fzerorubigd@gmail.com>
+  * @author    Behrooz Shabani <everplays@gmail.com>
+  * @author    Koosha Khajeh Moogahi <koosha.khajeh@gmail.com>
+  * @copyright 2012 (c) ParsPooyesh Co
+  * @license   GNU GPLv3+ <http://www.gnu.org/licenses/gpl-3.0.html>
+  * @link      http://www.xamin.ir
+  *
+  */
 class Form_Validator extends AgaviValidator
 {
+    /**
+      * Registers validators
+      *
+      * @param Form_Form              $form       The form
+      * @param AgaviValidationManager $vm         the validation manager
+      * @param array                  $parameters the input parameters
+      * @param array                  $files      a list of files (optional)
+      *
+      * @return void
+      */
     public static function registerValidators(Form_Form $form, AgaviValidationManager $vm, array $parameters, array $files = array())
     {
         $conditions = array();
@@ -55,7 +94,12 @@ class Form_Validator extends AgaviValidator
             }
         }
     }
-
+    
+    /**
+      * Does the validation
+      *
+      * @return bool true if the element has a valid value. False otherwise.
+      */
     function validate()
     {
         $element = $this->getParameter('element');
