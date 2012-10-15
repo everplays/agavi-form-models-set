@@ -1,5 +1,33 @@
 <?php
+/**
+  * Abstract top level class for form elements
+  * 
+  * PHP version 5.3
+  *
+  * @category  Xamin
+  * @package   XaminApplianceMarket
+  * @author    Alireza Ghafouri <fzerorubigd@gmail.com>
+  * @author    Behrooz Shabani <everplays@gmail.com>
+  * @author    Koosha Khajeh Moogahi <koosha.khajeh@gmail.com>
+  * @copyright 2012 (c) ParsPooyesh Co
+  * @license   GNU GPLv3+ <http://www.gnu.org/licenses/gpl-3.0.html>
+  * @link      http://www.xamin.ir
+  *
+  */
 
+/**
+  * Abstract top level class for form elements
+  *
+  * @category  Xamin
+  * @package   XaminApplianceMarket
+  * @author    Alireza Ghafouri <fzerorubigd@gmail.com>
+  * @author    Behrooz Shabani <everplays@gmail.com>
+  * @author    Koosha Khajeh Moogahi <koosha.khajeh@gmail.com>
+  * @copyright 2012 (c) ParsPooyesh Co
+  * @license   GNU GPLv3+ <http://www.gnu.org/licenses/gpl-3.0.html>
+  * @link      http://www.xamin.ir
+  *
+  */
 abstract class Form_Element
 {
     public $idPrefix = 'xamin-el-';
@@ -182,7 +210,12 @@ abstract class Form_Element
         $class = preg_replace("/^Form_Elements_|^Form_/", '', get_class($this));
         return $renderer->getEngine()->render("Form/{$class}", array("t" => $this));
     }
-    
+   
+    /**
+      * returns the rendered element as a string
+      *
+      * @return string the rendered element in string
+      */
     public function __toString()
     {
         return $this->html();
@@ -201,7 +234,7 @@ abstract class Form_Element
      * prepares given value before regular validation check, also a good place
      * for having element specifc validation check
      *
-     * @param mixed $value
+     * @param mixed $value The value to be set to
      *
      * @return mixed
      */
