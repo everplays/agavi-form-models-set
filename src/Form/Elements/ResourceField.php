@@ -1,9 +1,44 @@
 <?php
+/**
+  * Class implementing ResourceField element
+  * 
+  * PHP version 5.3
+  *
+  * @category  Xamin
+  * @package   XaminApplianceMarket
+  * @author    Alireza Ghafouri <fzerorubigd@gmail.com>
+  * @author    Behrooz Shabani <everplays@gmail.com>
+  * @author    Koosha Khajeh Moogahi <koosha.khajeh@gmail.com>
+  * @copyright 2012 (c) ParsPooyesh Co
+  * @license   GNU GPLv3+ <http://www.gnu.org/licenses/gpl-3.0.html>
+  * @link      http://www.xamin.ir
+  *
+  */
+
+/**
+  * Class implementing ResourceField element
+  *
+  * @category  Xamin
+  * @package   XaminApplianceMarket
+  * @author    Alireza Ghafouri <fzerorubigd@gmail.com>
+  * @author    Behrooz Shabani <everplays@gmail.com>
+  * @author    Koosha Khajeh Moogahi <koosha.khajeh@gmail.com>
+  * @copyright 2012 (c) ParsPooyesh Co
+  * @license   GNU GPLv3+ <http://www.gnu.org/licenses/gpl-3.0.html>
+  * @link      http://www.xamin.ir
+  *
+  */
+
 
 class Form_Elements_ResourceField extends Form_Element
 {
     /**
      * constructs element
+     *
+     * @param array                  $configuration optional configuration array
+     * @param Form_Elements_Fieldset $form          From (default to NULL)
+     *
+     * @return an object
      */
     public function __construct($configuration=null, Form_Elements_Fieldset $form=null)
     {
@@ -17,7 +52,7 @@ class Form_Elements_ResourceField extends Form_Element
                 'disabled' => 'is_bool',
                 'defaultValue' => 'is_int',
                 'depends' => 'is_array',
-                'source' => __CLASS__.'::is_source',
+                'source' => __CLASS__.'::isSource',
                 'params' => 'is_object'
             )
         );
@@ -31,7 +66,7 @@ class Form_Elements_ResourceField extends Form_Element
      *
      * @return bool $source could be string or array
      */
-    public static function is_source($source)
+    public static function isSource($source)
     {
         return is_string($source) or is_array($source);
     }
@@ -58,7 +93,7 @@ class Form_Elements_ResourceField extends Form_Element
     /**
      * prepares value before regular check
      *
-     * @param mixed $value Input
+     * @param mixed $value the value to be set to
      *
      * @return int
      */
