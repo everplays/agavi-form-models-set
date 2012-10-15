@@ -1,9 +1,43 @@
 <?php
+/**
+  * Class implementing Checkbox element
+  * 
+  * PHP version 5.3
+  *
+  * @category  Xamin
+  * @package   XaminApplianceMarket
+  * @author    Alireza Ghafouri <fzerorubigd@gmail.com>
+  * @author    Behrooz Shabani <everplays@gmail.com>
+  * @author    Koosha Khajeh Moogahi <koosha.khajeh@gmail.com>
+  * @copyright 2012 (c) ParsPooyesh Co
+  * @license   GNU GPLv3+ <http://www.gnu.org/licenses/gpl-3.0.html>
+  * @link      http://www.xamin.ir
+  *
+  */
+
+/**
+  * Class implementing Checkbox element
+  *
+  * @category  Xamin
+  * @package   XaminApplianceMarket
+  * @author    Alireza Ghafouri <fzerorubigd@gmail.com>
+  * @author    Behrooz Shabani <everplays@gmail.com>
+  * @author    Koosha Khajeh Moogahi <koosha.khajeh@gmail.com>
+  * @copyright 2012 (c) ParsPooyesh Co
+  * @license   GNU GPLv3+ <http://www.gnu.org/licenses/gpl-3.0.html>
+  * @link      http://www.xamin.ir
+  *
+  */
 
 class Form_Elements_Checkbox extends Form_Element
 {
     /**
      * constructs element
+     *
+     * @param array                  $configuration optional configuration array
+     * @param Form_Elements_Fieldset $form          From (default to NULL)
+     *
+     * @return an object
      */
     public function __construct($configuration=null, Form_Elements_Fieldset $form=null)
     {
