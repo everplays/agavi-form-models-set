@@ -1,11 +1,42 @@
 <?php
+/**
+  * Class implementing Form
+  * 
+  * PHP version 5.3
+  *
+  * @category  Xamin
+  * @package   XaminApplianceMarket
+  * @author    Alireza Ghafouri <fzerorubigd@gmail.com>
+  * @author    Behrooz Shabani <everplays@gmail.com>
+  * @author    Koosha Khajeh Moogahi <koosha.khajeh@gmail.com>
+  * @copyright 2012 (c) ParsPooyesh Co
+  * @license   GNU GPLv3+ <http://www.gnu.org/licenses/gpl-3.0.html>
+  * @link      http://www.xamin.ir
+  *
+  */
 
+/**
+  * Class implementing Form
+  *
+  * @category  Xamin
+  * @package   XaminApplianceMarket
+  * @author    Alireza Ghafouri <fzerorubigd@gmail.com>
+  * @author    Behrooz Shabani <everplays@gmail.com>
+  * @author    Koosha Khajeh Moogahi <koosha.khajeh@gmail.com>
+  * @copyright 2012 (c) ParsPooyesh Co
+  * @license   GNU GPLv3+ <http://www.gnu.org/licenses/gpl-3.0.html>
+  * @link      http://www.xamin.ir
+  *
+  */
 class Form_Form extends Form_Elements_Fieldset
 {
     /**
      * constructs element
+     *
+     * @param array     $configuration The configuration array (default to NULL)
+     * @param Form_Form $form          The input form (default to NULL)
      */
-    public function __construct($configuration=null, Form_Form $form=null)
+    public function __construct($configuration = null, Form_Form $form = null)
     {
         $this->configDefinition = array_merge(
             $this->configDefinition,
@@ -14,13 +45,20 @@ class Form_Form extends Form_Elements_Fieldset
                 'description' => 'is_string',
                 'action' => 'is_string',
                 'method' => 'is_string',
-                'renderer' => __CLASS__.'::is_agavi_renderer'
+                'renderer' => __CLASS__.'::isAgaviRenderer'
             )
         );
         parent::__construct($configuration, $form);
     }
 
-    public static function is_agavi_renderer($v)
+    /**
+      * Determines whether the supplied argument is an instance of AgaviRenderer class
+      *
+      * @param mixed $v the input argument
+      *
+      * @return bool true if the input is an object of AgaviRenderer. false otherwise.
+      */
+    public static function isAgaviRenderer($v)
     {
         return $v instanceof AgaviRenderer;
     }
