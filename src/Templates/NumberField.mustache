@@ -1,26 +1,13 @@
 {{#t}}
-<script language="javascript">
-    jQuery.validator.addClassRules("rules-{{idPrefix}}{{id}}", {
-        digits: true,
-    {{#required}}
-        required: true,
-    {{/required}}
-    {{#min}}
-        min: {{.}},
-    {{/min}}
-    {{#max}}
-        max: {{.}},
-    {{/max}}
-    {{#allowDecimal}}
-        number: true,
-        digits: false,
-    {{/allowDecimal}}
-    });
-</script>
 <div class="{{elementClass}}" id="{{idPrefix}}{id}_container">
     {{#title}}<label for="{{idPrefix}}{{id}}">{{.}}:</label>{{/title}}
     <div class="input">
-        <input type="text" name="{{name}}" id="{{idPrefix}}{{id}}" value="{{value}}" {{#readonly}}readonly="readonly"{{/readonly}} {{#disabled}}disabled="disabled"{{/disabled}} class="rules-{{idPrefix}}{{id}}" />
+        <input type="text" name="{{name}}" id="{{idPrefix}}{{id}}" value="{{value}}" 
+        {{#readonly}}readonly="readonly"{{/readonly}} 
+        {{#disabled}}disabled="disabled"{{/disabled}} 
+        class="{{#allowDecimal}}number{{/allowDecimal}}{{^allowDecimal}}digits{{/allowDecimal}} {{#required}}required{{/required}}" 
+        {{#min}}min="{{.}}"{{/min}}
+        {{#max}}max="{{.}}"{{/max}} />
     </div>
 </div>
 {{/t}}

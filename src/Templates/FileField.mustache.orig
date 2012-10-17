@@ -1,0 +1,15 @@
+{{#t}}
+<script language="javascript">
+    jQuery.validator.addClassRules("rules-{{idPrefix}}{{id}}", {
+    {{#required}}
+        required: true,
+    {{/required}}
+    });
+</script>
+<div class="{{elementClass}}" id="{{idPrefix}}{{id}}_container">
+    {{#title}}<label for="{{idPrefix}}{{id}}">{{.}}:</label>{{/title}}
+    <div class="input">
+        <input type="file" name="{{name}}" class="rules-{{idPrefix}}{{id}} input-file" id="{{idPrefix}}{{id}}" {{#readonly}}readonly="readonly"{{/readonly}} {{#disabled}}disabled="disabled"{{/disabled}} />
+    </div>
+</div>
+{{/t}}

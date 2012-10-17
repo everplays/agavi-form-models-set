@@ -1,0 +1,27 @@
+{{#t}}
+<script language="javascript">
+    jQuery.validator.addClassRules("rules-{{idPrefix}}{{id}}", {
+    {{#required}}
+        required: true,
+    {{/required}}
+    {{#min}}
+        minlength: {{.}},
+    {{/min}}
+    {{#max}}
+        maxlength: {{.}},
+    {{/max}}
+    {{#email}}
+        email: true,
+    {{/email}}
+    {{#equal}}
+        equalTo: "#{{.}}",
+    {{/equal}}
+    });
+</script>
+<div class="{{elementClass}}" id="{{idPrefix}}{{id}}_container">
+    {{#title}}<label for="{{idPrefix}}{{id}}">{{.}}:</label>{{/title}}
+    <div class="input">
+        <input type="text" name="{{name}}" id="{{idPrefix}}{{id}}" value="{{value}}" {{#max}}maxlength="{{.}}"{{/max}} {{#readonly}}readonly="readonly"{{/readonly}} {{#disabled}}disabled="disabled"{{/disabled}} class="rules-{{idPrefix}}{{id}}" />
+    </div>
+</div>
+{{/t}}

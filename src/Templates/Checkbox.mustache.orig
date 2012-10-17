@@ -1,0 +1,16 @@
+{{#t}}
+<script language="javascript">
+    jQuery.validator.addClassRules("rules-{{idPrefix}}{{id}}", {
+    {{#required}}
+        required: true,
+    {{/required}}
+    });
+</script>
+<div class="{{elementClass}}" id="{{idPrefix}}{{id}}_container">
+    {{#title}}<label for="{{idPrefix}}{{id}}">{{.}}:</label>{{/title}}
+    <div class="input">
+        <input type="checkbox" name="{{name}}" id="{{idPrefix}}{{id}}" {{#value}}checked="checked"{{/value}} {{#man}}maxlength="{{.}}"{{/man}} {{#readonly}}readonly="readonly"{{/readonly}} {{#disabled}}disabled="disabled"{{/disabled}} class="rules-{{idPrefix}}{{id}}" />
+        {{#description}}<span class="help-block">{{.}}</span>{{/description}}
+    </div>
+</div>
+{{/t}}
