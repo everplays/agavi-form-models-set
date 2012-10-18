@@ -8,7 +8,8 @@
         {{#disabled}}disabled="disabled"{{/disabled}} 
         class='{{#required}}required {{/required}}{{#email}}email {{/email}}' 
         {{#min}}minlength="{{.}}" {{/min}}
-        {{#equal}}equalTo="{{.}}" {{/equal}}/>
+        {{#equal}}equalTo="{{.}}" {{/equal}}
+        {{#regex}}regexp="{{.}}" {{/regex}} />
     </div>
 </div>
 {{/t}}
