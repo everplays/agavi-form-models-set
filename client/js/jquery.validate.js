@@ -1,6 +1,15 @@
-/*! jQuery Validation Plugin - v1.10.0 - 9/7/2012
-* https://github.com/jzaefferer/jquery-validation
-* Copyright (c) 2012 Jörn Zaefferer; Licensed MIT, GPL */
+/**
+ * jQuery Validation Plugin 1.11.0pre
+ *
+ * http://bassistance.de/jquery-plugins/jquery-plugin-validation/
+ * http://docs.jquery.com/Plugins/Validation
+ *
+ * Copyright (c) 2012 Jörn Zaefferer
+ *
+ * Dual licensed under the MIT and GPL licenses:
+ *   http://www.opensource.org/licenses/mit-license.php
+ *   http://www.gnu.org/licenses/gpl.html
+ */
 
 (function($) {
 
@@ -227,7 +236,7 @@ $.extend($.validator, {
 		onkeyup: function(element, event) {
 			if ( event.which === 9 && this.elementValue(element) === '' ) {
 				return;
-			} else if ( element.name in this.submitted || element === this.lastActive ) {
+			} else if ( element.name in this.submitted || element === this.lastElement ) {
 				this.element(element);
 			}
 		},
@@ -1008,9 +1017,6 @@ $.extend($.validator, {
 
 			param = typeof param === "string" && {url:param} || param;
 
-			if ( this.pending[element.name] ) {
-				return "pending";
-			}
 			if ( previous.old === value ) {
 				return previous.valid;
 			}

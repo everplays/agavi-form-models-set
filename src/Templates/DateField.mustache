@@ -1,18 +1,12 @@
 {{#t}}
-<script language="javascript">
-    jQuery.validator.addClassRules("rules-{{idPrefix}}{{id}}", {
-    {{#required}}
-        required: true,
-    {{/required}}
-        {{! Requires a date with format dd/dd/dddd }}
-        date: true
-    });
-</script>
 <div class="{{elementClass}}" id="{{idPrefix}}{{id}}_container">
     {{#title}}<label for="{{idPrefix}}{{id}}">{{.}}:</label>{{/title}}
     <div class="input">
         <div class="input-append">
-            <input type="text" name="{{name}}" id="{{idPrefix}}{{id}}" value="{{value}}" {{#readonly}}readonly="readonly"{{/readonly}} {{#disabled}}disabled="disabled"{{/disabled}} class="rules-{{idPrefix}}{{id}}" />
+            <input type="text" name="{{name}}" id="{{idPrefix}}{{id}}" value="{{value}}" 
+            {{#readonly}}readonly="readonly"{{/readonly}} 
+            {{#disabled}}disabled="disabled"{{/disabled}} 
+            class="date {{#required}}required{{/required}}" />
         </div>
     </div>
 </div>
