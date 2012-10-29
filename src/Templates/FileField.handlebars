@@ -1,0 +1,8 @@
+{{#with t}}
+<div class="{{elementClass}}" id="{{idPrefix}}{{id}}_container">
+    {{#if title}}<label for="{{idPrefix}}{{id}}">{{title}}:</label>{{/if}}
+    <div class="input">
+        <input type="file" name="{{name}}" id="{{idPrefix}}{{id}}"{{#if readonly}} readonly="readonly"{{/if}}{{#if disabled}} disabled="disabled"{{/if}} class="input-file {{#if required}}required{{/if}}"/>
+    </div>
+</div>
+{{/with}}

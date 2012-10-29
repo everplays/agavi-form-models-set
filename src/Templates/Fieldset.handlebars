@@ -1,0 +1,12 @@
+{{#with t}}
+<div class="{{elementClass}}>
+    <fieldset id="{{idPrefix}}{{id}}_container">
+        {{#if title}}<legend>{{title}}</legend>{{/if}}
+        {{#each getChildren}}
+            {{#unless isRendered}}
+                {{{html}}}
+            {{/unless}}
+        {{/each}}
+    </fieldset>
+</div>
+{{/with}}

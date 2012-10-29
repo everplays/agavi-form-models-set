@@ -1,0 +1,8 @@
+{{#with t}}
+<div class="{{elementClass}}" id="{{idPrefix}}{id}_container">
+    {{#if title}}<label for="{{idPrefix}}{{id}}">{{title}}:</label>{{/if}}
+    <div class="input">
+        <input type="text" name="{{name}}" id="{{idPrefix}}{{id}}" value="{{value}}"{{#if readonly}} readonly="readonly"{{/if}}{{#if disabled}} disabled="disabled"{{/if}} class="{{#if allowDecimal}}number{{/if}}{{#unless allowDecimal}}digits{{/unless}}{{#if required}} required{{/if}}"{{#if min}} min="{{min}}"{{/if}}{{#if max}} max="{{max}}"{{/if}} />
+    </div>
+</div>
+{{/with}}

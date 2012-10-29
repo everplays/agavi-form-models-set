@@ -1,0 +1,8 @@
+{{#with t}}
+<div class="{{elementClass}}" id="{{idPrefix}}{{id}}_container">
+    {{#if title}}<label for="{{idPrefix}}{{id}}">{{title}}:</label>{{/if}}
+    <div class="input">
+        <textarea name="{{name}}" id="{{idPrefix}}{{id}}" rows="5" cols="80"{{#if readonly}} readonly="readonly"{{/if}}{{#if disabled}} disabled="disabled"{{/if}} class="textarea{{#if required}} required{{/if}}"{{#if min}} minlength="{{min}}"{{/if}}{{#if max}} maxlength="{{max}}"{{/if}}>{{value}}</textarea>
+    </div>
+</div>
+{{/with}}

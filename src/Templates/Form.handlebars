@@ -1,10 +1,10 @@
-{{#t}}
+{{#with t}}
 <form id="{{idPrefix}}{{id}}" action="{{action}}" enctype="multipart/form-data" method="{{method}}">
-{{#getChildren}}
-    {{^isRendered}}
+{{#each getChildren}}
+    {{#unless isRendered}}
         {{{html}}}
-    {{/isRendered}}
-{{/getChildren}}
+    {{/unless}}
+{{/each}}
 <input type="submit" value="{{submit}}" class="btn primary" />
 </form>
-{{/t}}
+{{/with}}

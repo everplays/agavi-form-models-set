@@ -1,0 +1,12 @@
+{{#with}}
+<div class="{{elementClass}}" id="{{idPrefix}}{{id}}_container">
+    {{#if title}}<label for="{{idPrefix}}{{id}}">{{title}}:</label>{{/if}}
+    <div class="input">
+        <div class="input-append">
+            <input type="text" name="{{name}}_view" id="{{idPrefix}}{{id}}_view" {{#if view}}value="{{view}}"{{/if}}{{#if readonly}} readonly="readonly"{{/if}}{{#if disabled}} disabled="disabled"{{/if}} class="resource{{#if required}} required{{/if}}" />
+            <input type="hidden" name="{{name}}" id="{{idPrefix}}{{id}}" value="{{value}}"/>
+            <label class="add-on">↓</label>
+        </div>
+    </div>
+</div>
+{{/with}}

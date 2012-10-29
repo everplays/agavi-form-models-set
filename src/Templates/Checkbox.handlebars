@@ -1,0 +1,9 @@
+{{#with t}}
+<div class="{{elementClass}}" id="{{idPrefix}}{{id}}_container">
+    {{#if title}}<label for="{{idPrefix}}{{id}}">{{title}}:</label>{{/if}}
+    <div class="input">
+        <input type="checkbox" name="{{name}}" id="{{idPrefix}}{{id}}"{{#if value}} checked="checked"{{/if}}{{#if readonly}} readonly="readonly"{{/if}}{{#if disabled}} disabled="disabled"{{/if}} class="chackbox {{#if required}}required{{/if}}" />
+        {{#if description}}<span class="help-block">{{description}}</span>{{/if}}
+    </div>
+</div>
+{{/with}}

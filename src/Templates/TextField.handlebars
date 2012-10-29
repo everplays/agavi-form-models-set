@@ -1,0 +1,8 @@
+{{#with t}}
+<div class="{{elementClass}}" id="{{idPrefix}}{{id}}_container">
+    {{#if title}}<label for="{{idPrefix}}{{id}}">{{title}}:</label>{{/if}}
+    <div class="input">
+        <input type="text" name="{{name}}" id="{{idPrefix}}{{id}}" value="{{value}}"{{#if max}} maxlength="{{max}}"{{/if}}{{#if readonly}} readonly="readonly"{{/if}}{{#if disabled}} disabled="disabled"{{/if}}class="text{{#if email}} email{{/if}}{{#if required}} required{{/if}}"{{#if min}} minlength="{{min}}"{{/if}}{{#if equal}} equalTo="{{equl}}" {{/if}}{{#if regex}} pattern="{{regex}}" {{/if}} />
+    </div>
+</div>
+{{/with}}

@@ -1,0 +1,17 @@
+{{#with t}}
+<div class="{{elementClass}}" id="{{idPrefix}}{{id}}_container">
+    {{#if title}}<label>{{title}}:</label>{{/if}}
+    <div class="input">
+        <ul class="inputs-list">
+            {{#if items}}
+                <li>
+                    <label>
+                        <input type="radio" name="{{name}}" value="{{value}}"{{#if checked}} checked="checked"{{/if}}{{#if readonly}} readonly="readonly"{{/if}}{{#if disabled}} disabled="disabled"{{/if}} class="radio{{#if required}} required{{/if}}" />
+                        <span>{{label}}</span>
+                    </label>
+                </li>
+            {{/if}}
+        </ul>
+    </div>
+</div>
+{{/with}}
