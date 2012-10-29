@@ -218,7 +218,11 @@ abstract class Form_Element
       */
     public function __toString()
     {
-        return $this->html();
+		try {
+		    return $this->html();
+		} catch (Exception $e) {
+		    return $e->getMessage();
+		}
     }
 
     /**
