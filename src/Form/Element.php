@@ -40,7 +40,8 @@ abstract class Form_Element
         'id' => 'is_int',
         'name' => 'is_string',
         'parents' => 'is_array',
-        'title' => 'is_string'
+        'title' => 'is_string',
+        'class' => 'is_string'
     );
 
     /**
